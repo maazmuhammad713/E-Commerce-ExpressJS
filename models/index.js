@@ -21,6 +21,21 @@ cart.belongsTo(user, {
   foreignKey: { name: "userID", allowNull: false },
 });
 
+// M-M btw user & product
+user.belongsToMany(product, {
+  onDelete: "CASCADE",
+  through: "UserProduct",
+  as: "Product",
+  foreignKey: { name: "userID", allowNull: false },
+});
+
+product.belongsToMany(user, {
+  onDelete: "CASCADE",
+  through: "UserProduct",
+  as: " User",
+  foreignKey: { name: "productID", allowNull: false },
+});
+
 // O-M btw user & order
 user.hasMany(order, {
   onDelete: "CASCADE",

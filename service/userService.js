@@ -21,6 +21,9 @@ module.exports = {
       email: data.email,
       phoneNumber: data.phoneNumber,
     });
+    // default cart while creating user
+    const cart = await models.cart.create({ userID: result.id });
+    result.setCart(cart);
 
     return result;
   },
