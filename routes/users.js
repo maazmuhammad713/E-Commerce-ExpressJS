@@ -13,7 +13,7 @@ var router = express.Router();
 router.get("/", getUsers);
 router.get("/:id", getUserById);
 router.post("/createUser", createUser);
-router.put("/updateUser", updateUser);
-router.delete("/deleteUser", deleteUser);
+router.put("/updateUser/:id", updateUser);
+router.delete("/deleteUser/:id", deleteUser);
 
 module.exports = router;

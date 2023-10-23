@@ -8,11 +8,6 @@ const cart = sequelize.define(
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    total: {
-      allowNull: true,
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
   },
   {
     timestamps: true,

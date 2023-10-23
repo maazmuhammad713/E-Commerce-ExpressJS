@@ -24,7 +24,6 @@ module.exports = {
     // default cart while creating user
     const cart = await models.cart.create({ userID: result.id });
     result.setCart(cart);
-
     return result;
   },
 
@@ -39,16 +38,17 @@ module.exports = {
       result.phoneNumber = data.phoneNumber;
 
       await result.save();
-
       return result;
     }
   },
   deleteUser: async (id) => {
-    const result = await models.user.findByPk(parseInt(id));
+    const result = await models.user.findByPk(id);
+    console.log(result);
     if (!result) {
       return "The user with the given ID was not found."; //404
     } else {
       await result.destroy();
+
       return result;
     }
   },
