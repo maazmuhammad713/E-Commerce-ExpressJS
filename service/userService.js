@@ -1,4 +1,5 @@
 const { models } = require("../models");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   getUsers: async () => {
@@ -15,11 +16,15 @@ module.exports = {
   },
 
   createUser: async (data) => {
+    const salltRound = 10;
+    data.password = bcrypt.hashSync(data.password, salltRound);
+
     const result = await models.user.create({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phoneNumber: data.phoneNumber,
+      password: data.password,
     });
     // default cart while creating user
     const cart = await models.cart.create({ userID: result.id });
