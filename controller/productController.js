@@ -34,7 +34,25 @@ module.exports = {
     res.send(result);
   },
   updateProduct: async (req, res) => {
-    const result = await productService.updateProduct(req.params.id, req.body);
+    const productID = req.params.id;
+    const { title, image, description, price, rating, categoryID } = req.body;
+
+    if (!categoryID || !Array.isArray(categoryID)) {
+      return res.status(400).json({ error: "categoryIds must be an array" });
+    }
+
+    const result = await productService.updateProduct(
+      productID,
+      {
+        title,
+        image,
+        description,
+        price,
+        rating,
+      },
+      categoryID
+    );
+
     res.send(result);
   },
   deleteProduct: async (req, res) => {

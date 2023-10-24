@@ -20,7 +20,7 @@ module.exports = {
       if (product) {
         // Add the product to the user's cart
         await result.addProduct(product);
-        return true;
+        return product;
       }
     }
 

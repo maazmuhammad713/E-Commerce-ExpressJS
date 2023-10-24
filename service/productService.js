@@ -27,22 +27,25 @@ module.exports = {
     }
     return result;
   },
-  updateProduct: async (id, data) => {
-    const result = await models.product.findByPk(id);
-    if (!result) {
-      return "The product with the given ID was not found."; //404
-    } else {
-      result.title = data.title;
-      result.image = data.image;
-      result.description = data.description;
-      result.price = data.price;
-      result.rating = data.rating;
-      result.categoryID = data.categoryId;
-
-      await result.save();
-
-      return result;
+  updateProduct: async (productID, data, categoryID) => {
+    const product = await models.product.findByPk(parseInt(productID));
+    if (!product) {
+      throw new Error("Product not found");
     }
+
+    product.title = data.title;
+    product.image = data.image;
+    product.description = data.description;
+    product.price = data.price;
+    product.rating = data.rating;
+
+    await product.save();
+
+    if (Array.isArray(categoryID) && categoryID.length > 0) {
+      await product.setCategory(categoryID);
+    }
+
+    return product;
   },
   deleteProduct: async (id) => {
     const result = await models.product.findByPk(parseInt(id));
