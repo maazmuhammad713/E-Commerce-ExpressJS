@@ -11,7 +11,7 @@ var {
 /* GET Products listing. */
 //
 router.get("/", getProducts);
-router.get("/getProduct/:id", getProductById);
+router.get("/:id", getProductById);
 
 // categoryId,userId,
 // {
